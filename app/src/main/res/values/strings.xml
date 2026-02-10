@@ -9,6 +9,10 @@
     <string name="preference_category_webhook">הגדרות Webhook</string>
     <string name="preference_enabled">מופעל</string>
     <string name="preference_export_logs">צפייה בלוגים</string>
+    <string name="preference_persistent_background_mode">מצב עבודה קבוע ברקע</string>
+    <string name="summary_persistent_background_mode">שומר על האזנה פעילה עם התראה קבועה</string>
+    <string name="foreground_service_channel_name">שירות רקע</string>
+    <string name="foreground_service_notification_text">האזנה ל-SMS פעילה</string>
     <string name="preference_webhook_url">כתובת URL</string>
     <string name="preference_user_id">מזהה משתמש</string>
     <string name="summary_export_logs">ייצוא לוגים לקובץ</string>

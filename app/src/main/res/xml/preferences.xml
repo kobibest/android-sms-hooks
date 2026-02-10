@@ -9,6 +9,13 @@
             app:key="webhookEnabled"
             app:title="@string/preference_enabled" />
 
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:iconSpaceReserved="false"
+            app:key="persistentBackgroundMode"
+            app:summary="@string/summary_persistent_background_mode"
+            app:title="@string/preference_persistent_background_mode" />
+
         <Preference
             app:iconSpaceReserved="false"
             app:key="webhookUrl"
