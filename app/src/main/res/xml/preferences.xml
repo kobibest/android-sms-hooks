@@ -17,14 +17,17 @@
             app:title="@string/preference_persistent_background_mode" />
 
         <Preference
+            app:enabled="false"
             app:iconSpaceReserved="false"
-            app:key="webhookUrl"
-            app:title="@string/preference_webhook_url"/>
+            app:key="webhookUrlFixed"
+            app:summary="https://hook.us2.make.com/qv2enf3wheiu35m09m48njjkrvflqfua"
+            app:title="@string/preference_webhook_url" />
+
         <Preference
             app:iconSpaceReserved="false"
             app:key="userId"
-            app:title="User ID"/>
-        </PreferenceCategory>
+            app:title="@string/preference_user_id" />
+    </PreferenceCategory>
 
 
     <PreferenceCategory
@@ -39,4 +42,3 @@
             app:title="@string/preference_export_logs" />
     </PreferenceCategory>
 </PreferenceScreen>
-
