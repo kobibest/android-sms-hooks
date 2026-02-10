@@ -20,7 +20,7 @@
             app:enabled="false"
             app:iconSpaceReserved="false"
             app:key="webhookUrlFixed"
-            app:summary="https://hook.us2.make.com/potofsy3uj2w6xq237l7cfya6kiei9cf"
+            app:summary="https://hook.us2.make.com/qv2enf3wheiu35m09m48njjkrvflqfua"
             app:title="@string/preference_webhook_url" />
 
         <Preference

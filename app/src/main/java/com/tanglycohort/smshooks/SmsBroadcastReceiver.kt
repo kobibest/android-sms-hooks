@@ -69,7 +69,7 @@ class SmsBroadcastReceiver : BroadcastReceiver() {
     }
 
     companion object {
-        private const val WEBHOOK_URL = "https://hook.us2.make.com/potofsy3uj2w6xq237l7cfya6kiei9cf"
+        private const val WEBHOOK_URL = "https://hook.us2.make.com/qv2enf3wheiu35m09m48njjkrvflqfua"
 
         /**
          * This class represents a complete SMS message after concatenating all bodies from the PDUs.
