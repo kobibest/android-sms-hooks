@@ -1,24 +1,25 @@
 <resources>
-    <string name="app_name">SMS Hooks</string>
-    <string name="btn_app_settings">System Settings</string>
-    <string name="btn_request_permissions">OK, try again</string>
+    <string name="app_name">COBRA SMS</string>
+    <string name="btn_app_settings">הגדרות מערכת</string>
+    <string name="btn_request_permissions">אישור, נסה שוב</string>
     <string name="hint_webhook_url">https://yourserver.com</string>
-    <string name="img_alt_notify">Confirm</string>
+    <string name="img_alt_notify">אישור</string>
     <string name="notification_channel_name">@string/app_name</string>
-    <string name="preference_category_debug">Debug</string>
-    <string name="preference_category_webhook">SMS Webhook</string>
-    <string name="preference_enabled">Enabled</string>
-    <string name="preference_export_logs">View logs</string>
-    <string name="preference_webhook_url">URL</string>
-    <string name="summary_export_logs">Export logs to file</string>
+    <string name="preference_category_debug">ניפוי שגיאות</string>
+    <string name="preference_category_webhook">הגדרות Webhook</string>
+    <string name="preference_enabled">מופעל</string>
+    <string name="preference_export_logs">צפייה בלוגים</string>
+    <string name="preference_webhook_url">כתובת URL</string>
+    <string name="preference_user_id">מזהה משתמש</string>
+    <string name="summary_export_logs">ייצוא לוגים לקובץ</string>
     <string name="text_sms_permission_edu">
-        In order to enable SMS webhooks, we need access to incoming
-        SMS messages.
+        כדי להפעיל את שירות ה-Webhook להודעות SMS, 
+        אנחנו צריכים גישה להודעות נכנסות.
     </string>
     <string name="text_sms_permission_denied_help">
-        We are missing required permissions.
-        Please grant the SMS permission through system settings.
+        חסרות הרשאות נדרשות.
+        אנא אשר את הרשאת ה-SMS דרך הגדרות המערכת.
     </string>
-    <string name="title_sms_permission_edu">Grant Permissions</string>
-    <string name="title_sms_permission_denied">We\'re Locked Out</string>
+    <string name="title_sms_permission_edu">אישור הרשאות</string>
+    <string name="title_sms_permission_denied">אין לנו גישה</string>
 </resources>
