@@ -18,13 +18,14 @@ class WebhookWorker(context: Context, params: WorkerParameters) : Worker(context
         val smsFrom = inputData.getString("SMS_FROM") ?: return Result.failure()
         val smsTimestamp = inputData.getLong("SMS_TIMESTAMP", 0)
         val webhookUrl = inputData.getString("WEBHOOK_URL") ?: return Result.failure()
-
+        val userId = inputData.getString("USER_ID") ?: ""
+        
         val jsonBody = JSONObject()
             .put("body", smsBody)
             .put("from", smsFrom)
             .put("timestamp", smsTimestamp)
+            .put("user_id", userId)
             .toString()
-
         val request = Request.Builder()
             .url(webhookUrl)
             .post(jsonBody.toRequestBody(MEDIA_TYPE_JSON))
@@ -54,4 +55,5 @@ class WebhookWorker(context: Context, params: WorkerParameters) : Worker(context
         private val MEDIA_TYPE_JSON = "application/json; charset=utf-8".toMediaType()
     }
 }
+
 
