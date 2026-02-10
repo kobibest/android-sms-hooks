@@ -33,6 +33,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private lateinit var preferences: SharedPreferences
     private lateinit var webhookUrl: Preference
     private lateinit var userId: Preference
+
     private val registrationToCreateTextFile =
         registerForActivityResult(
             CreateTextFile()
@@ -66,24 +67,21 @@ class SettingsFragment : PreferenceFragmentCompat() {
             setOnPreferenceClickListener { onExportPreferenceClick() }
         }
     }
+
     private fun observeDialogResults(backStackEntry: NavBackStackEntry) {
         LifecycleEventObserver { _, event ->
-    if (event == Lifecycle.Event.ON_RESUME) {
-        if (backStackEntry.savedStateHandle.contains(webhookUrl.key)) {
-            backStackEntry.savedStateHandle.get<String>(webhookUrl.key).also {
-                setPreference(webhookUrl.key, "https://$it")
-                webhookUrl.summary = it
-            }
-        }
-    if (backStackEntry.savedStateHandle.contains(userId.key)) {
-        backStackEntry.savedStateHandle.get<String>(userId.key).also {
-            setPreference(userId.key, it ?: "")
-            userId.summary = it ?: "Not set"
-        }
-    }
-}                backStackEntry.savedStateHandle.get<String>(webhookUrl.key).also {
-                    setPreference(webhookUrl.key, "https://$it")
-                    webhookUrl.summary = it
+            if (event == Lifecycle.Event.ON_RESUME) {
+                if (backStackEntry.savedStateHandle.contains(webhookUrl.key)) {
+                    backStackEntry.savedStateHandle.get<String>(webhookUrl.key).also {
+                        setPreference(webhookUrl.key, "https://$it")
+                        webhookUrl.summary = it
+                    }
+                }
+                if (backStackEntry.savedStateHandle.contains(userId.key)) {
+                    backStackEntry.savedStateHandle.get<String>(userId.key).also {
+                        setPreference(userId.key, it ?: "")
+                        userId.summary = it ?: "Not set"
+                    }
                 }
             }
         }.also {
@@ -106,6 +104,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
         return true
     }
+
     private fun onUserIdClick(preference: Preference): Boolean {
         SettingsFragmentDirections.apply {
             actionSettingsFragmentToUrlPreferenceDialogFragment(
@@ -149,4 +148,3 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 }
-
