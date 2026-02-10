@@ -65,7 +65,7 @@ class UrlDialogFragment() : DialogFragment() {
         if (isValidUrl(editable.toString())) {
             setError(null)
         } else {
-            setError("Invalid URL")
+            setError(if (args.forceHttps) "Invalid URL" else "Cannot be empty")
         }
     }
 
@@ -83,9 +83,12 @@ class UrlDialogFragment() : DialogFragment() {
     }
 
     private fun isValidUrl(url: String): Boolean {
+        if (!args.forceHttps) {
+            return url.isNotEmpty()
+        }
         return try {
             true.also {
-                if (args.forceHttps) "https://$url".toHttpUrl() else url.toHttpUrl()
+                "https://$url".toHttpUrl()
             }
         } catch (e: IllegalArgumentException) {
             false
