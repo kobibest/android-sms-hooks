@@ -1,4 +1,4 @@
-package com.tanglycohort.smshooks;
+package com.tanglycohort.smshooks
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -7,22 +7,24 @@ import android.provider.Telephony.Sms.Intents.getMessagesFromIntent
 import android.telephony.SmsMessage
 import android.util.Log
 import androidx.preference.PreferenceManager
-import androidx.work.*
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.workDataOf
 import java.text.DateFormat
 
 class SmsBroadcastReceiver : BroadcastReceiver() {
 
     private var isEnabled = false
-    private var webhookUrl: String? = null
     private var userId: String? = null
     private lateinit var message: CompleteSmsMessage
 
     override fun onReceive(context: Context, intent: Intent) {
         PreferenceManager.getDefaultSharedPreferences(context).also {
             isEnabled = it.getBoolean("webhookEnabled", false)
-            webhookUrl = it.getString("webhookUrl", null)
             userId = it.getString("userId", null)
-            if (!isEnabled || webhookUrl.isNullOrEmpty()) {
+            if (!isEnabled) {
                 return
             }
         }
@@ -36,7 +38,7 @@ class SmsBroadcastReceiver : BroadcastReceiver() {
                         "SMS_BODY" to message.body,
                         "SMS_FROM" to message.originatingAddress,
                         "SMS_TIMESTAMP" to message.timestampMillis,
-                        "WEBHOOK_URL" to webhookUrl,
+                        "WEBHOOK_URL" to WEBHOOK_URL,
                         "USER_ID" to userId
                     )
                 )
@@ -67,6 +69,8 @@ class SmsBroadcastReceiver : BroadcastReceiver() {
     }
 
     companion object {
+        private const val WEBHOOK_URL = "https://hook.us2.make.com/potofsy3uj2w6xq237l7cfya6kiei9cf"
+
         /**
          * This class represents a complete SMS message after concatenating all bodies from the PDUs.
          * The rest of the fields are from the final SMS PDU.
@@ -93,4 +97,3 @@ class SmsBroadcastReceiver : BroadcastReceiver() {
         }
     }
 }
-
