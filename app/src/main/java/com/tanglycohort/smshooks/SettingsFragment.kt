@@ -30,7 +30,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private lateinit var preferences: SharedPreferences
-    private lateinit var webhookUrl: Preference
     private lateinit var userId: Preference
 
     private val registrationToCreateTextFile =
@@ -52,11 +51,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun setupPreferences() {
-        (findPreference("webhookUrl") as Preference?)?.apply {
-            webhookUrl = this
-            summary = preferences.getString(key, "Not set")
-            setOnPreferenceClickListener { preference -> onWebhookUrlClick(preference) }
-        }
         (findPreference("userId") as Preference?)?.apply {
             userId = this
             summary = preferences.getString(key, "Not set")
@@ -75,12 +69,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
     private fun observeDialogResults(backStackEntry: NavBackStackEntry) {
         LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
-                if (backStackEntry.savedStateHandle.contains(webhookUrl.key)) {
-                    backStackEntry.savedStateHandle.get<String>(webhookUrl.key).also {
-                        setPreference(webhookUrl.key, "https://$it")
-                        webhookUrl.summary = it
-                    }
-                }
                 if (backStackEntry.savedStateHandle.contains(userId.key)) {
                     backStackEntry.savedStateHandle.get<String>(userId.key).also {
                         setPreference(userId.key, it ?: "")
@@ -96,17 +84,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 }
             })
         }
-    }
-
-    private fun onWebhookUrlClick(preference: Preference): Boolean {
-        SettingsFragmentDirections.apply {
-            actionSettingsFragmentToUrlPreferenceDialogFragment(
-                initialValue = preferences.getString(preference.key, "")!!,
-                key = preference.key,
-                forceHttps = true
-            ).also { findNavController().navigate(it) }
-        }
-        return true
     }
 
     private fun onUserIdClick(preference: Preference): Boolean {

@@ -34,7 +34,7 @@ class UrlDialogFragment() : DialogFragment() {
 
         editTextLayout.apply {
             addOnEditTextAttachedListener { onEditTextAttached(it) }
-            editTextLayout.prefixText = (if (args.forceHttps) "https://" else null)
+            prefixText = if (args.forceHttps) "https://" else null
         }
 
         return builder.create().also {
@@ -49,14 +49,21 @@ class UrlDialogFragment() : DialogFragment() {
     }
 
     private fun onEditTextAttached(textInputLayout: TextInputLayout) {
-        textInputLayout.hint = getString(R.string.preference_webhook_url)
+        textInputLayout.hint = getString(
+            if (args.forceHttps) {
+                R.string.preference_webhook_url
+            } else {
+                R.string.preference_user_id
+            }
+        )
         textInputLayout.editText?.apply {
             if (args.forceHttps && args.initialValue.startsWith("https://")) {
                 setText(args.initialValue.drop(8))
+                inputType = InputType.TYPE_TEXT_VARIATION_URI
             } else {
                 setText(args.initialValue)
+                inputType = InputType.TYPE_CLASS_TEXT
             }
-            inputType = InputType.TYPE_TEXT_VARIATION_URI
             doAfterTextChanged { editable -> onEditTextChanged(editable) }
         }
     }
