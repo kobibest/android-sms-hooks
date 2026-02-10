@@ -13,7 +13,11 @@
             app:iconSpaceReserved="false"
             app:key="webhookUrl"
             app:title="@string/preference_webhook_url"/>
-    </PreferenceCategory>
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="userId"
+            app:title="User ID"/>
+        </PreferenceCategory>
 
 
     <PreferenceCategory
@@ -28,3 +32,4 @@
             app:title="@string/preference_export_logs" />
     </PreferenceCategory>
 </PreferenceScreen>
+
