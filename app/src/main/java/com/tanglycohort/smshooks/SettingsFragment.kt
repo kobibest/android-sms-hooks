@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.DocumentsContract
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -66,6 +65,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
         (findPreference("exportLogs") as Preference?)?.apply {
             setOnPreferenceClickListener { onExportPreferenceClick() }
         }
+        (findPreference(MainActivity.BACKGROUND_MODE_KEY) as Preference?)?.apply {
+            setOnPreferenceChangeListener { _, newValue ->
+                onBackgroundModePreferenceChange(newValue as Boolean)
+            }
+        }
     }
 
     private fun observeDialogResults(backStackEntry: NavBackStackEntry) {
@@ -118,6 +122,17 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private fun onExportPreferenceClick(): Boolean {
         registrationToCreateTextFile.launch("smshooks_log.txt")
+        return true
+    }
+
+    private fun onBackgroundModePreferenceChange(isEnabled: Boolean): Boolean {
+        context?.also {
+            if (isEnabled) {
+                SmsHooksForegroundService.start(it)
+            } else {
+                SmsHooksForegroundService.stop(it)
+            }
+        }
         return true
     }
 
