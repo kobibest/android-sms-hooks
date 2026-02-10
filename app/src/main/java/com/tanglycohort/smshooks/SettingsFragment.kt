@@ -32,7 +32,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     private lateinit var preferences: SharedPreferences
     private lateinit var webhookUrl: Preference
-
+    private lateinit var userId: Preference
     private val registrationToCreateTextFile =
         registerForActivityResult(
             CreateTextFile()
@@ -57,17 +57,31 @@ class SettingsFragment : PreferenceFragmentCompat() {
             summary = preferences.getString(key, "Not set")
             setOnPreferenceClickListener { preference -> onWebhookUrlClick(preference) }
         }
+        (findPreference("userId") as Preference?)?.apply {
+            userId = this
+            summary = preferences.getString(key, "Not set")
+            setOnPreferenceClickListener { preference -> onUserIdClick(preference) }
+        }
         (findPreference("exportLogs") as Preference?)?.apply {
             setOnPreferenceClickListener { onExportPreferenceClick() }
         }
     }
-
     private fun observeDialogResults(backStackEntry: NavBackStackEntry) {
         LifecycleEventObserver { _, event ->
-            if (event == Lifecycle.Event.ON_RESUME
-                && backStackEntry.savedStateHandle.contains(webhookUrl.key)
-            ) {
-                backStackEntry.savedStateHandle.get<String>(webhookUrl.key).also {
+    if (event == Lifecycle.Event.ON_RESUME) {
+        if (backStackEntry.savedStateHandle.contains(webhookUrl.key)) {
+            backStackEntry.savedStateHandle.get<String>(webhookUrl.key).also {
+                setPreference(webhookUrl.key, "https://$it")
+                webhookUrl.summary = it
+            }
+        }
+    if (backStackEntry.savedStateHandle.contains(userId.key)) {
+        backStackEntry.savedStateHandle.get<String>(userId.key).also {
+            setPreference(userId.key, it ?: "")
+            userId.summary = it ?: "Not set"
+        }
+    }
+}                backStackEntry.savedStateHandle.get<String>(webhookUrl.key).also {
                     setPreference(webhookUrl.key, "https://$it")
                     webhookUrl.summary = it
                 }
@@ -88,6 +102,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 initialValue = preferences.getString(preference.key, "")!!,
                 key = preference.key,
                 forceHttps = true
+            ).also { findNavController().navigate(it) }
+        }
+        return true
+    }
+    private fun onUserIdClick(preference: Preference): Boolean {
+        SettingsFragmentDirections.apply {
+            actionSettingsFragmentToUrlPreferenceDialogFragment(
+                initialValue = preferences.getString(preference.key, "")!!,
+                key = preference.key,
+                forceHttps = false
             ).also { findNavController().navigate(it) }
         }
         return true
@@ -125,3 +149,4 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
     }
 }
+
