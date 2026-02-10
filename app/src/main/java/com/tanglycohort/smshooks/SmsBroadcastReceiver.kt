@@ -14,12 +14,14 @@ class SmsBroadcastReceiver : BroadcastReceiver() {
 
     private var isEnabled = false
     private var webhookUrl: String? = null
+    private var userId: String? = null
     private lateinit var message: CompleteSmsMessage
 
     override fun onReceive(context: Context, intent: Intent) {
         PreferenceManager.getDefaultSharedPreferences(context).also {
             isEnabled = it.getBoolean("webhookEnabled", false)
             webhookUrl = it.getString("webhookUrl", null)
+            userId = it.getString("userId", null)
             if (!isEnabled || webhookUrl.isNullOrEmpty()) {
                 return
             }
@@ -34,7 +36,8 @@ class SmsBroadcastReceiver : BroadcastReceiver() {
                         "SMS_BODY" to message.body,
                         "SMS_FROM" to message.originatingAddress,
                         "SMS_TIMESTAMP" to message.timestampMillis,
-                        "WEBHOOK_URL" to webhookUrl
+                        "WEBHOOK_URL" to webhookUrl,
+                        "USER_ID" to userId
                     )
                 )
                 setConstraints(
@@ -90,3 +93,4 @@ class SmsBroadcastReceiver : BroadcastReceiver() {
         }
     }
 }
+
