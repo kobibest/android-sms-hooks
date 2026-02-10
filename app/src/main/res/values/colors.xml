@@ -10,5 +10,11 @@
     <color name="white">#FFFFFF</color>
     <color name="grayDark">#333333</color>
     <color name="grayLight">#F5F5F5</color>
-    <color name="errorRed">#E74C3C</color>
+    // Legacy colors - still used in layouts
+    <color name="fuzzyWuzzy">#2ECC71</color>
+    <color name="terraCotta">#27AE60</color>
+    <color name="mantis">#2ECC71</color>
+    <color name="littleBoyBlue">#2ECC71</color>
+    <color name="lightSkyBlue">#58D68D</color>
+    <color name="denim">#27AE60</color>
 </resources>
