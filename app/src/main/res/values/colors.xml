@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     // Adaptive icon bg color
-    <color name="ic_launcher_background">#FFF</color>
-
-    // Theme colors
-    <color name="littleBoyBlue">#569EF0</color>
-    <color name="lightSkyBlue">#98D6FF</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
+    // Theme colors - COBRA Green
+    <color name="cobraGreen">#2ECC71</color>
+    <color name="cobraGreenDark">#27AE60</color>
+    <color name="cobraGreenLight">#58D68D</color>
     <color name="black">#000000</color>
-    <color name="white">#ffffff</color>
-    <color name="denim">#1060BC</color>
-    <color name="fuzzyWuzzy">#C66C72</color>
-    <color name="mantis">#78BC61</color>
-    <color name="grassGreen">#73BE06</color>
-    <color name="terraCotta">#ED6A5A</color>
+    <color name="white">#FFFFFF</color>
+    <color name="grayDark">#333333</color>
+    <color name="grayLight">#F5F5F5</color>
+    <color name="errorRed">#E74C3C</color>
 </resources>
