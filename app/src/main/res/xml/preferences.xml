@@ -29,6 +29,24 @@
             app:title="@string/preference_user_id" />
     </PreferenceCategory>
 
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="backgroundPermissionsCategory"
+        app:title="@string/preference_category_background_permissions">
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="disableBatteryOptimization"
+            app:summary="@string/summary_disable_battery_optimization"
+            app:title="@string/preference_disable_battery_optimization" />
+
+        <Preference
+            app:iconSpaceReserved="false"
+            app:key="enableAutostart"
+            app:summary="@string/summary_enable_autostart"
+            app:title="@string/preference_enable_autostart" />
+    </PreferenceCategory>
+
 
     <PreferenceCategory
         app:iconSpaceReserved="false"

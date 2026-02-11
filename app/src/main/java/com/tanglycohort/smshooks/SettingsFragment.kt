@@ -1,11 +1,14 @@
 package com.tanglycohort.smshooks
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.DocumentsContract
+import android.provider.Settings
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts.CreateDocument
 import androidx.lifecycle.Lifecycle
@@ -64,6 +67,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
                 onBackgroundModePreferenceChange(newValue as Boolean)
             }
         }
+        (findPreference("disableBatteryOptimization") as Preference?)?.apply {
+            setOnPreferenceClickListener { onDisableBatteryOptimizationClick() }
+        }
+        (findPreference("enableAutostart") as Preference?)?.apply {
+            setOnPreferenceClickListener { onEnableAutostartClick() }
+        }
     }
 
     private fun observeDialogResults(backStackEntry: NavBackStackEntry) {
@@ -111,6 +120,39 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
         return true
+    }
+
+    private fun onDisableBatteryOptimizationClick(): Boolean {
+        val intent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+        } else {
+            Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                data = Uri.parse("package:${requireContext().packageName}")
+            }
+        }
+        launchIntentOrAppDetails(intent)
+        return true
+    }
+
+    private fun onEnableAutostartClick(): Boolean {
+        val miuiIntent = Intent().apply {
+            setClassName(
+                "com.miui.securitycenter",
+                "com.miui.permcenter.autostart.AutoStartManagementActivity"
+            )
+        }
+        launchIntentOrAppDetails(miuiIntent)
+        return true
+    }
+
+    private fun launchIntentOrAppDetails(intent: Intent) {
+        try {
+            startActivity(intent)
+        } catch (_: ActivityNotFoundException) {
+            startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                data = Uri.parse("package:${requireContext().packageName}")
+            })
+        }
     }
 
     /**
