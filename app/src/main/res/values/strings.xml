@@ -11,10 +11,17 @@
     <string name="preference_export_logs">צפייה בלוגים</string>
     <string name="preference_persistent_background_mode">מצב עבודה קבוע ברקע</string>
     <string name="summary_persistent_background_mode">שומר על האזנה פעילה עם התראה קבועה</string>
-    <string name="foreground_service_channel_name">שירות רקע</string>
-    <string name="foreground_service_notification_text">האזנה ל-SMS פעילה</string>
+    <string name="foreground_service_channel_name">COBRA SMS Service</string>
+    <string name="foreground_service_channel_description">שירות האזנה להודעות SMS</string>
+    <string name="foreground_service_notification_title">COBRA פעיל</string>
+    <string name="foreground_service_notification_text">מאזין להודעות OTP</string>
     <string name="preference_webhook_url">כתובת URL</string>
     <string name="preference_user_id">מזהה משתמש</string>
+    <string name="preference_category_background_permissions">הרשאות פעילות ברקע</string>
+    <string name="preference_disable_battery_optimization">ביטול Battery Optimization</string>
+    <string name="summary_disable_battery_optimization">במיוחד בשיאומי: Settings → Apps → Your App → Battery → No restrictions</string>
+    <string name="preference_enable_autostart">הפעלת Autostart</string>
+    <string name="summary_enable_autostart">בשיאומי: Settings → Apps → Permissions → Autostart (כדי לקבל SMS אחרי ריסטארט)</string>
     <string name="summary_export_logs">ייצוא לוגים לקובץ</string>
     <string name="text_sms_permission_edu">
         כדי להפעיל את שירות ה-Webhook להודעות SMS, 
@@ -23,6 +30,7 @@
     <string name="text_sms_permission_denied_help">
         חסרות הרשאות נדרשות.
         אנא אשר את הרשאת ה-SMS דרך הגדרות המערכת.
+        בנוסף, בשיאומי חשוב לבטל Battery Optimization ולהפעיל Autostart כדי שהאפליקציה לא תמות ברקע.
     </string>
     <string name="title_sms_permission_edu">אישור הרשאות</string>
     <string name="title_sms_permission_denied">אין לנו גישה</string>

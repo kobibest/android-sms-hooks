@@ -34,7 +34,10 @@ class SmsHooksForegroundService : Service() {
             CHANNEL_ID,
             getString(R.string.foreground_service_channel_name),
             NotificationManager.IMPORTANCE_LOW
-        )
+        ).apply {
+            description = getString(R.string.foreground_service_channel_description)
+            setShowBadge(false)
+        }
 
         getSystemService(NotificationManager::class.java).createNotificationChannel(channel)
     }
@@ -48,10 +51,11 @@ class SmsHooksForegroundService : Service() {
         )
 
         return NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle(getString(R.string.app_name))
+            .setContentTitle(getString(R.string.foreground_service_notification_title))
             .setContentText(getString(R.string.foreground_service_notification_text))
             .setSmallIcon(R.drawable.ic_notify)
             .setOngoing(true)
+            .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
             .setContentIntent(pendingIntent)
             .build()
     }
