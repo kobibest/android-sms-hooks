@@ -11,8 +11,10 @@
     <string name="preference_export_logs">צפייה בלוגים</string>
     <string name="preference_persistent_background_mode">מצב עבודה קבוע ברקע</string>
     <string name="summary_persistent_background_mode">שומר על האזנה פעילה עם התראה קבועה</string>
-    <string name="foreground_service_channel_name">שירות רקע</string>
-    <string name="foreground_service_notification_text">האזנה ל-SMS פעילה</string>
+    <string name="foreground_service_channel_name">COBRA SMS Service</string>
+    <string name="foreground_service_channel_description">שירות האזנה להודעות SMS</string>
+    <string name="foreground_service_notification_title">COBRA פעיל</string>
+    <string name="foreground_service_notification_text">מאזין להודעות OTP</string>
     <string name="preference_webhook_url">כתובת URL</string>
     <string name="preference_user_id">מזהה משתמש</string>
     <string name="preference_category_background_permissions">הרשאות פעילות ברקע</string>
